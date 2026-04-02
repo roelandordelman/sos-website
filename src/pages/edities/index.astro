@@ -1,8 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-
-const base = import.meta.env.BASE_URL;
+import { base } from '../../lib/base';
 
 const edities = (await getCollection('edities'))
   .sort((a, b) => b.data.datum.getTime() - a.data.datum.getTime());
@@ -10,15 +9,11 @@ const edities = (await getCollection('edities'))
 
 <BaseLayout title="Speech Tech Days" description="Overzicht van alle edities van de Dutch Speech Tech Day.">
   <div class="container">
-
     <div class="page-header">
       <h1>Dutch Speech Tech Day</h1>
-      <p>
-        De jaarlijkse bijeenkomst voor iedereen die betrokken is bij Nederlandse spraaktechnologie —
-        onderzoekers, ontwikkelaars, studenten en gebruikers.
-      </p>
+      <p>De jaarlijkse bijeenkomst voor iedereen die betrokken is bij Nederlandse spraaktechnologie —
+        onderzoekers, ontwikkelaars, studenten en gebruikers.</p>
     </div>
-
     <ul class="post-list">
       {edities.map(e => (
         <li>
@@ -31,6 +26,5 @@ const edities = (await getCollection('edities'))
         </li>
       ))}
     </ul>
-
   </div>
 </BaseLayout>
