@@ -222,6 +222,20 @@ declare module 'astro:content' {
 } & { render(): Render[".md"] };
 };
 "nieuws": {
+"STD2026.md": {
+	id: "STD2026.md";
+  slug: "std2026";
+  body: string;
+  collection: "nieuws";
+  data: InferEntrySchema<"nieuws">
+} & { render(): Render[".md"] };
+"testbericht.md": {
+	id: "testbericht.md";
+  slug: "testbericht";
+  body: string;
+  collection: "nieuws";
+  data: InferEntrySchema<"nieuws">
+} & { render(): Render[".md"] };
 "welkom.md": {
 	id: "welkom.md";
   slug: "welkom";

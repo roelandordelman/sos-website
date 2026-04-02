@@ -21,6 +21,13 @@ const { Content } = await post.render();
       </p>
       <h1>{post.data.title}</h1>
     </div>
+    {post.data.image && (
+      <img
+        src={`${base}${post.data.image}`}
+        alt={post.data.title}
+        style="width: 100%; max-width: 720px; border-radius: 6px; margin-bottom: 2rem; display: block;"
+      />
+    )}
     <div class="article-body"><Content /></div>
     <p style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border);">
       <a href={`${base}nieuws`}>← Terug naar nieuws</a>

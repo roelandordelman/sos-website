@@ -7,6 +7,7 @@ const nieuws = defineCollection({
     date: z.date(),
     description: z.string().optional(),
     auteur: z.string().optional(),
+    image: z.string().optional(),          // Bestandsnaam in /public, bijv. "nieuws/mijnfoto.jpg"
     linkedin_tekst: z.string().optional(), // Tekst voor LinkedIn post (max ~700 tekens aanbevolen)
   }),
 });
