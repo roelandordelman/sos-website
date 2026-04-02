@@ -1,10 +1,11 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  // Productie-URL (zodra het domein is gekoppeld aan Codeberg Pages):
-  site: 'https://openspraaktechnologie.org',
+  // Test-URL via Codeberg Pages:
+  site: 'https://roelandordelman.codeberg.page',
+  base: '/sos-website',
 
-  // Zolang je test via Codeberg Pages zonder eigen domein, gebruik dit:
-  // site: 'https://opensource-spraakherkenning-nl.codeberg.page',
-  // base: '/sos-website',
+  // Zodra het domein is gekoppeld, vervang bovenstaande door:
+  // site: 'https://openspraaktechnologie.org',
+  // (en verwijder de base regel)
 });
