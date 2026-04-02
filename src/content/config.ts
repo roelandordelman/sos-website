@@ -32,4 +32,14 @@ const edities = defineCollection({
   }),
 });
 
-export const collections = { nieuws, projecten, edities };
+const bestuur = defineCollection({
+  type: 'content',
+  schema: z.object({
+    naam: z.string(),
+    rol: z.string(),
+    foto: z.string().optional(),
+    volgorde: z.number().default(99),
+  }),
+});
+
+export const collections = { nieuws, projecten, edities, bestuur };

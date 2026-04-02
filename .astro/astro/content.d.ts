@@ -140,7 +140,51 @@ declare module 'astro:content' {
 	>;
 
 	type ContentEntryMap = {
-		"edities": {
+		"bestuur": {
+"grzegorz-chrupala.md": {
+	id: "grzegorz-chrupala.md";
+  slug: "grzegorz-chrupala";
+  body: string;
+  collection: "bestuur";
+  data: InferEntrySchema<"bestuur">
+} & { render(): Render[".md"] };
+"henk-van-den-heuvel.md": {
+	id: "henk-van-den-heuvel.md";
+  slug: "henk-van-den-heuvel";
+  body: string;
+  collection: "bestuur";
+  data: InferEntrySchema<"bestuur">
+} & { render(): Render[".md"] };
+"khiet-truong.md": {
+	id: "khiet-truong.md";
+  slug: "khiet-truong";
+  body: string;
+  collection: "bestuur";
+  data: InferEntrySchema<"bestuur">
+} & { render(): Render[".md"] };
+"matt-coler.md": {
+	id: "matt-coler.md";
+  slug: "matt-coler";
+  body: string;
+  collection: "bestuur";
+  data: InferEntrySchema<"bestuur">
+} & { render(): Render[".md"] };
+"odette-scharenborg.md": {
+	id: "odette-scharenborg.md";
+  slug: "odette-scharenborg";
+  body: string;
+  collection: "bestuur";
+  data: InferEntrySchema<"bestuur">
+} & { render(): Render[".md"] };
+"roeland-ordelman.md": {
+	id: "roeland-ordelman.md";
+  slug: "roeland-ordelman";
+  body: string;
+  collection: "bestuur";
+  data: InferEntrySchema<"bestuur">
+} & { render(): Render[".md"] };
+};
+"edities": {
 "speechtechdag-2023.md": {
 	id: "speechtechdag-2023.md";
   slug: "speechtechdag-2023";

@@ -1,5 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { base } from '../lib/base';
+
+const bestuursleden = (await getCollection('bestuur'))
+  .sort((a, b) => a.data.volgorde - b.data.volgorde);
 ---
 
 <BaseLayout
@@ -33,37 +38,28 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <h2>Bestuur</h2>
       <p>Bestuursleden ontvangen geen vergoeding; gemaakte onkosten worden vergoed.</p>
 
-      <div class="card-grid" style="margin-top: 1.5rem;">
-        <div class="card">
-          <p class="post-meta">Voorzitter</p>
-          <h3>Roeland Ordelman</h3>
-          <p>Senior onderzoeker Conversational Interaction, Universiteit Twente. Technology Advisor, Nederlands Instituut voor Beeld &amp; Geluid. CTO CLARIAH.</p>
-        </div>
-        <div class="card">
-          <p class="post-meta">Secretaris</p>
-          <h3>Khiet Truong</h3>
-          <p>Universitair Hoofddocent, Human Media Interaction groep, Universiteit Twente, Enschede.</p>
-        </div>
-        <div class="card">
-          <p class="post-meta">Penningmeester</p>
-          <h3>Henk van den Heuvel</h3>
-          <p>Coördinator Centre for Language and Speech Technology (CLST), Radboud Universiteit Nijmegen. Hoofd Humanities Lab, Faculteit der Letteren.</p>
-        </div>
-        <div class="card">
-          <p class="post-meta">Bestuurslid</p>
-          <h3>Grzegorz Chrupala</h3>
-          <p>Universitair Hoofddocent, Tilburg School of Humanities and Digital Sciences, Vakgroep Cognitive Science and Artificial Intelligence.</p>
-        </div>
-        <div class="card">
-          <p class="post-meta">Bestuurslid</p>
-          <h3>Matt Coler</h3>
-          <p>UHD, Rijksuniversiteit Groningen, Campus Fryslân.</p>
-        </div>
-        <div class="card">
-          <p class="post-meta">Bestuurslid</p>
-          <h3>Odette Scharenborg</h3>
-          <p>Hoogleraar en Delft Technology Fellow, Technische Universiteit Delft.</p>
-        </div>
+      <div class="bestuur-grid">
+        {bestuursleden.map(async (lid) => {
+          const { Content } = await lid.render();
+          return (
+            <div class="bestuur-card">
+              {lid.data.foto && (
+                <img
+                  src={`${base}${lid.data.foto.replace(/^\//, '')}`}
+                  alt={lid.data.naam}
+                  class="bestuur-foto"
+                />
+              )}
+              <div class="bestuur-info">
+                <p class="post-meta">{lid.data.rol}</p>
+                <h3>{lid.data.naam}</h3>
+                <div class="bestuur-beschrijving">
+                  <Content />
+                </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </section>
 
@@ -104,3 +100,44 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   </div>
 </BaseLayout>
+
+<style>
+  .bestuur-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 1.5rem;
+  }
+
+  .bestuur-card {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+
+  .bestuur-foto {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+    flex-shrink: 0;
+    border: 2px solid var(--color-border);
+  }
+
+  .bestuur-info h3 {
+    margin-bottom: 0.25rem;
+  }
+
+  .bestuur-beschrijving p {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  @media (max-width: 640px) {
+    .bestuur-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
