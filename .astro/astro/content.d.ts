@@ -141,6 +141,27 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"edities": {
+"speechtechdag-2023.md": {
+	id: "speechtechdag-2023.md";
+  slug: "speechtechdag-2023";
+  body: string;
+  collection: "edities";
+  data: InferEntrySchema<"edities">
+} & { render(): Render[".md"] };
+"speechtechdag-2024.md": {
+	id: "speechtechdag-2024.md";
+  slug: "speechtechdag-2024";
+  body: string;
+  collection: "edities";
+  data: InferEntrySchema<"edities">
+} & { render(): Render[".md"] };
+"speechtechdag-2025.md": {
+	id: "speechtechdag-2025.md";
+  slug: "speechtechdag-2025";
+  body: string;
+  collection: "edities";
+  data: InferEntrySchema<"edities">
+} & { render(): Render[".md"] };
 "speechtechdag-2026.md": {
 	id: "speechtechdag-2026.md";
   slug: "speechtechdag-2026";

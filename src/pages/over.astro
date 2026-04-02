@@ -14,57 +14,80 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
 
     <section class="section" id="missie">
-      <h2>Missie &amp; visie</h2>
+      <h2>Missie</h2>
       <p>
-        Stichting Open Spraaktechnologie faciliteert kennisuitwisseling en samenwerking
-        rondom de ontwikkeling van hoogwaardige, open Nederlandse spraaktechnologie.
-        Wij positioneren ons als katalysator voor een levendig, samenwerkend ecosysteem
-        waarin informatie vrij kan stromen tussen onderzoeksinstellingen, industrie,
-        overheidsorganisaties en het publiek.
+        Stichting Open Spraaktechnologie stelt zich ten doel hoogwaardige Nederlandse
+        spraaktechnologie beschikbaar te maken voor de Nederlandse onderzoeksgemeenschap,
+        non-profitinstellingen en andere geïnteresseerde partijen.
+      </p>
+      <p>
+        De stichting beheert open source spraaktechnologie, faciliteert de verdere
+        ontwikkeling ervan en biedt diensten aan voor niet-commercieel gebruik door
+        publieke instellingen zoals archieven, omroepen, overheidsinstanties en
+        universiteiten. Ze is opgericht door taal- en spraaktechnologieonderzoekers
+        van de Universiteit Twente en de Radboud Universiteit Nijmegen.
       </p>
     </section>
 
     <section class="section" id="bestuur">
       <h2>Bestuur</h2>
-      <p>
-        Het bestuur van de stichting bestaat uit vertegenwoordigers vanuit onderzoek,
-        industrie en maatschappelijke organisaties.
-      </p>
-      <!-- Voeg bestuursleden toe als lijst, bijv.: -->
-      <!--
-      <ul>
-        <li><strong>Voorzitter</strong> — Naam</li>
-        <li><strong>Secretaris</strong> — Naam</li>
-        <li><strong>Penningmeester</strong> — Naam</li>
-      </ul>
-      -->
-      <p><em>Bestuursinformatie volgt binnenkort.</em></p>
+      <p>Bestuursleden ontvangen geen vergoeding; gemaakte onkosten worden vergoed.</p>
+
+      <div class="card-grid" style="margin-top: 1.5rem;">
+        <div class="card">
+          <p class="post-meta">Voorzitter</p>
+          <h3>Roeland Ordelman</h3>
+          <p>Senior onderzoeker Conversational Interaction, Universiteit Twente. Technology Advisor, Nederlands Instituut voor Beeld &amp; Geluid. CTO CLARIAH.</p>
+        </div>
+        <div class="card">
+          <p class="post-meta">Secretaris</p>
+          <h3>Khiet Truong</h3>
+          <p>Universitair Hoofddocent, Human Media Interaction groep, Universiteit Twente, Enschede.</p>
+        </div>
+        <div class="card">
+          <p class="post-meta">Penningmeester</p>
+          <h3>Henk van den Heuvel</h3>
+          <p>Coördinator Centre for Language and Speech Technology (CLST), Radboud Universiteit Nijmegen. Hoofd Humanities Lab, Faculteit der Letteren.</p>
+        </div>
+        <div class="card">
+          <p class="post-meta">Bestuurslid</p>
+          <h3>Grzegorz Chrupala</h3>
+          <p>Universitair Hoofddocent, Tilburg School of Humanities and Digital Sciences, Vakgroep Cognitive Science and Artificial Intelligence.</p>
+        </div>
+        <div class="card">
+          <p class="post-meta">Bestuurslid</p>
+          <h3>Matt Coler</h3>
+          <p>UHD, Rijksuniversiteit Groningen, Campus Fryslân.</p>
+        </div>
+        <div class="card">
+          <p class="post-meta">Bestuurslid</p>
+          <h3>Odette Scharenborg</h3>
+          <p>Hoogleraar en Delft Technology Fellow, Technische Universiteit Delft.</p>
+        </div>
+      </div>
     </section>
 
     <section class="section" id="anbi">
       <h2>ANBI-gegevens</h2>
-      <table style="border-collapse: collapse; width: 100%; max-width: 480px;">
+      <table style="border-collapse: collapse; width: 100%; max-width: 560px;">
         <tbody>
-          <tr>
-            <td style="padding: 0.4rem 1rem 0.4rem 0; color: var(--color-text-muted); white-space: nowrap;">Naam</td>
-            <td>Stichting Open Spraaktechnologie</td>
-          </tr>
-          <tr>
-            <td style="padding: 0.4rem 1rem 0.4rem 0; color: var(--color-text-muted);">KvK</td>
-            <td>74801260</td>
-          </tr>
-          <tr>
-            <td style="padding: 0.4rem 1rem 0.4rem 0; color: var(--color-text-muted);">Opgericht</td>
-            <td>10 mei 2019</td>
-          </tr>
-          <tr>
-            <td style="padding: 0.4rem 1rem 0.4rem 0; color: var(--color-text-muted);">RSIN</td>
-            <td><em>Volgt</em></td>
-          </tr>
-          <tr>
-            <td style="padding: 0.4rem 1rem 0.4rem 0; color: var(--color-text-muted);">Adres</td>
-            <td><em>Volgt</em></td>
-          </tr>
+          {[
+            ['Naam',             'Stichting Open Spraaktechnologie'],
+            ['RSIN',             '860031354'],
+            ['KvK',              '74801260'],
+            ['Opgericht',        '10 mei 2019'],
+            ['Postadres',        'Zesakkers 2108, 6605 TG Wijchen'],
+            ['Bezoekadres',      'Erasmusplein 1, 6525 HT Nijmegen'],
+            ['Bank',             'NL28 TRIO 0379 687 216 (Triodos Bank)'],
+            ['Contact',          'roeland.ordelman@utwente.nl'],
+            ['Beloningsbeleid',  'Bestuursleden ontvangen geen vergoeding; onkosten worden vergoed.'],
+            ['Financiering',     'Donaties'],
+          ].map(([label, value]) => (
+            <tr>
+              <td style="padding: 0.4rem 1.5rem 0.4rem 0; color: var(--color-text-muted); white-space: nowrap; vertical-align: top;">{label}</td>
+              <td style="padding: 0.4rem 0;">{value}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </section>
@@ -73,9 +96,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <h2>Colofon</h2>
       <p>
         Deze website is gebouwd met <a href="https://astro.build" target="_blank" rel="noopener">Astro</a>
-        en wordt gehost op <a href="https://codeberg.page" target="_blank" rel="noopener">Codeberg Pages</a>.
+        en wordt gehost op <a href="https://pages.github.com" target="_blank" rel="noopener">GitHub Pages</a>.
         De broncode is beschikbaar op
-        <a href="https://codeberg.org/opensource-spraakherkenning-nl/sos-website" target="_blank" rel="noopener">Codeberg</a>.
+        <a href="https://github.com/roelandordelman/sos-website" target="_blank" rel="noopener">GitHub</a>.
       </p>
     </section>
 
