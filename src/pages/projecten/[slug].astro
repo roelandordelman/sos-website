@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projecten = await getCollection('projecten');
+  return projecten.map(project => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+---
+
+<BaseLayout title={project.data.title} description={project.data.beschrijving}>
+  <div class="container">
+
+    <div class="article-header">
+      <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; flex-wrap: wrap;">
+        {project.data.taal && <span class="tag">{project.data.taal}</span>}
+        {project.data.status === 'archief' && <span class="tag">Archief</span>}
+      </div>
+      <h1>{project.data.title}</h1>
+      <p style="color: var(--color-text-muted); margin-top: 0.5rem;">{project.data.beschrijving}</p>
+      {project.data.github && (
+        <p style="margin-top: 1rem;">
+          <a href={project.data.github} target="_blank" rel="noopener" class="btn">
+            Bekijk op GitHub →
+          </a>
+        </p>
+      )}
+    </div>
+
+    <div class="article-body">
+      <Content />
+    </div>
+
+    <p style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border);">
+      <a href="/projecten">← Terug naar projecten</a>
+    </p>
+
+  </div>
+</BaseLayout>

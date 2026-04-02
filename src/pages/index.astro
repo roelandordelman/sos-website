@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const nieuws = await getCollection('nieuws');
+const recentNieuws = nieuws
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+
+const edities = await getCollection('edities');
+const komende = edities
+  .filter(e => e.data.datum >= new Date())
+  .sort((a, b) => a.data.datum.getTime() - b.data.datum.getTime())
+  .slice(0, 1);
+---
+
+<BaseLayout title="Home">
+  <div class="container">
+
+    <section class="hero">
+      <h1>Open Spraaktechnologie</h1>
+      <p class="tagline">
+        Kennis en samenwerking rondom hoogwaardige, open Nederlandse spraaktechnologie.
+      </p>
+      <div class="hero-actions">
+        <a href="/projecten" class="btn">Bekijk projecten</a>
+        <a href="/over" class="btn btn-outline">Over de stichting</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Doelstellingen</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Kennisuitwisseling</h3>
+          <p>Faciliteren van kennisuitwisseling tussen onderzoeksinstellingen, industrie, overheid en publiek.</p>
+        </div>
+        <div class="card">
+          <h3>Samenwerking</h3>
+          <p>Bevorderen van interdisciplinaire samenwerking binnen het ecosysteem.</p>
+        </div>
+        <div class="card">
+          <h3>Verantwoorde ontwikkeling</h3>
+          <p>Ondersteunen van verantwoorde ontwikkeling en toepassing van spraaktechnologie.</p>
+        </div>
+        <div class="card">
+          <h3>Informatiebron</h3>
+          <p>Fungeren als betrouwbare, objectieve bron over Nederlandse spraaktechnologie.</p>
+        </div>
+      </div>
+    </section>
+
+    {komende.length > 0 && (
+      <section class="section">
+        <h2 class="section-title">Aankomende editie</h2>
+        {komende.map(e => (
+          <>
+            <p>
+              <strong><a href={`/edities/${e.slug}`}>{e.data.title}</a></strong>
+              &nbsp;·&nbsp;
+              {e.data.datum.toLocaleDateString('nl-NL', { year: 'numeric', month: 'long', day: 'numeric' })}
+              {e.data.locatie && <> &nbsp;·&nbsp; {e.data.locatie}</>}
+            </p>
+            {e.data.beschrijving && <p style="color: var(--color-text-muted); margin-top: 0.5rem;">{e.data.beschrijving}</p>}
+          </>
+        ))}
+      </section>
+    )}
+
+    {recentNieuws.length > 0 && (
+      <section class="section">
+        <h2 class="section-title">Laatste nieuws</h2>
+        <ul class="post-list">
+          {recentNieuws.map(post => (
+            <li>
+              <p class="post-meta">
+                {post.data.date.toLocaleDateString('nl-NL', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </p>
+              <a href={`/nieuws/${post.slug}`} class="post-title">{post.data.title}</a>
+              {post.data.description && (
+                <p class="post-description">{post.data.description}</p>
+              )}
+            </li>
+          ))}
+        </ul>
+        <p style="margin-top: 1.25rem;">
+          <a href="/nieuws">Alle berichten →</a>
+        </p>
+      </section>
+    )}
+
+  </div>
+</BaseLayout>

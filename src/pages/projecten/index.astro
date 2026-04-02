@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const projecten = (await getCollection('projecten'))
+  .sort((a, b) => a.data.title.localeCompare(b.data.title, 'nl'));
+
+const actief  = projecten.filter(p => p.data.status === 'actief');
+const archief = projecten.filter(p => p.data.status === 'archief');
+---
+
+<BaseLayout title="Projecten" description="Open source spraaktechnologieprojecten voor het Nederlands.">
+  <div class="container">
+
+    <div class="page-header">
+      <h1>Projecten</h1>
+      <p>Open source tools en services voor Nederlandse spraaktechnologie.</p>
+    </div>
+
+    <section class="section">
+      <ul class="post-list">
+        {actief.map(project => (
+          <li>
+            <div style="display: flex; align-items: baseline; gap: 0.75rem; flex-wrap: wrap;">
+              <a href={`/projecten/${project.slug}`} class="post-title">{project.data.title}</a>
+              {project.data.taal && <span class="tag">{project.data.taal}</span>}
+            </div>
+            <p class="post-description">{project.data.beschrijving}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    {archief.length > 0 && (
+      <section class="section">
+        <h2>Archief</h2>
+        <ul class="post-list">
+          {archief.map(project => (
+            <li>
+              <a href={`/projecten/${project.slug}`} class="post-title">{project.data.title}</a>
+              <p class="post-description">{project.data.beschrijving}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+  </div>
+</BaseLayout>

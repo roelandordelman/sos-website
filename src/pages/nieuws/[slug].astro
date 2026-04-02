@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('nieuws');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <div class="container">
+
+    <div class="article-header">
+      <p class="post-meta">
+        {post.data.date.toLocaleDateString('nl-NL', { year: 'numeric', month: 'long', day: 'numeric' })}
+        {post.data.auteur && <> &nbsp;·&nbsp; {post.data.auteur}</>}
+      </p>
+      <h1>{post.data.title}</h1>
+    </div>
+
+    <div class="article-body">
+      <Content />
+    </div>
+
+    <p style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border);">
+      <a href="/nieuws">← Terug naar nieuws</a>
+    </p>
+
+  </div>
+</BaseLayout>

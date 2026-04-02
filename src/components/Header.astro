@@ -1,0 +1,36 @@
+---
+const navItems = [
+  { label: 'Over',       href: '/over' },
+  { label: 'Projecten',  href: '/projecten' },
+  { label: 'Edities',    href: '/edities' },
+  { label: 'Nieuws',     href: '/nieuws' },
+  { label: 'Bronnen',    href: '/bronnen' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="site-logo">
+        <!-- Vervang door het echte logo zodra het in /public staat -->
+        <span>Open Spraaktechnologie</span>
+      </a>
+      <nav class="site-nav" aria-label="Hoofdmenu">
+        <ul>
+          {navItems.map(item => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={currentPath.startsWith(item.href) ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>

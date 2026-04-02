@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const edities = await getCollection('edities');
+  return edities.map(e => ({
+    params: { slug: e.slug },
+    props: { editie: e },
+  }));
+}
+
+const { editie } = Astro.props;
+const { Content } = await editie.render();
+---
+
+<BaseLayout title={editie.data.title} description={editie.data.beschrijving}>
+  <div class="container">
+
+    <div class="article-header">
+      <p class="post-meta">
+        {editie.data.datum.toLocaleDateString('nl-NL', { year: 'numeric', month: 'long', day: 'numeric' })}
+        {editie.data.locatie && <> &nbsp;·&nbsp; {editie.data.locatie}</>}
+      </p>
+      <h1>{editie.data.title}</h1>
+      {editie.data.programma_url && (
+        <p style="margin-top: 1rem;">
+          <a href={editie.data.programma_url} target="_blank" rel="noopener" class="btn">
+            Bekijk programma →
+          </a>
+        </p>
+      )}
+    </div>
+
+    <div class="article-body">
+      <Content />
+    </div>
+
+    <p style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border);">
+      <a href="/edities">← Alle edities</a>
+    </p>
+
+  </div>
+</BaseLayout>

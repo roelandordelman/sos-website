@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const edities = (await getCollection('edities'))
+  .sort((a, b) => b.data.datum.getTime() - a.data.datum.getTime());
+
+const nu = new Date();
+const komend  = edities.filter(e => e.data.datum >= nu);
+const voorbij = edities.filter(e => e.data.datum < nu);
+---
+
+<BaseLayout title="Edities" description="Overzicht van alle edities van de SpeechTechdag.">
+  <div class="container">
+
+    <div class="page-header">
+      <h1>Edities SpeechTechdag</h1>
+      <p>De SpeechTechdag is het jaarlijkse evenement van de stichting.</p>
+    </div>
+
+    {komend.length > 0 && (
+      <section class="section">
+        <h2 class="section-title">Aankomend</h2>
+        <ul class="post-list">
+          {komend.map(e => (
+            <li>
+              <p class="post-meta">
+                {e.data.datum.toLocaleDateString('nl-NL', { year: 'numeric', month: 'long', day: 'numeric' })}
+                {e.data.locatie && <> &nbsp;·&nbsp; {e.data.locatie}</>}
+              </p>
+              <a href={`/edities/${e.slug}`} class="post-title">{e.data.title}</a>
+              {e.data.beschrijving && <p class="post-description">{e.data.beschrijving}</p>}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {voorbij.length > 0 && (
+      <section class="section">
+        <h2 class="section-title">Vorige edities</h2>
+        <ul class="post-list">
+          {voorbij.map(e => (
+            <li>
+              <p class="post-meta">
+                {e.data.datum.toLocaleDateString('nl-NL', { year: 'numeric', month: 'long', day: 'numeric' })}
+                {e.data.locatie && <> &nbsp;·&nbsp; {e.data.locatie}</>}
+              </p>
+              <a href={`/edities/${e.slug}`} class="post-title">{e.data.title}</a>
+              {e.data.beschrijving && <p class="post-description">{e.data.beschrijving}</p>}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+  </div>
+</BaseLayout>

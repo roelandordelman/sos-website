@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('nieuws'))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<BaseLayout title="Nieuws" description="Nieuws en berichten van Stichting Open Spraaktechnologie.">
+  <div class="container">
+
+    <div class="page-header">
+      <h1>Nieuws</h1>
+      <p>Berichten en updates van de stichting.</p>
+    </div>
+
+    {posts.length === 0 ? (
+      <p>Nog geen berichten.</p>
+    ) : (
+      <ul class="post-list">
+        {posts.map(post => (
+          <li>
+            <p class="post-meta">
+              {post.data.date.toLocaleDateString('nl-NL', { year: 'numeric', month: 'long', day: 'numeric' })}
+              {post.data.auteur && <> &nbsp;·&nbsp; {post.data.auteur}</>}
+            </p>
+            <a href={`/nieuws/${post.slug}`} class="post-title">{post.data.title}</a>
+            {post.data.description && (
+              <p class="post-description">{post.data.description}</p>
+            )}
+          </li>
+        ))}
+      </ul>
+    )}
+
+  </div>
+</BaseLayout>

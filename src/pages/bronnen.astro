@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const tools = [
+  {
+    naam: 'Kaldi_NL',
+    beschrijving: 'Nederlandse instantie van de Kaldi spraakherkenner, inclusief gebruikersgroepen en modellen.',
+    github: 'https://github.com/opensource-spraakherkenning-nl/Kaldi_NL',
+    taal: 'Shell',
+  },
+  {
+    naam: 'ASR NL Benchmark',
+    beschrijving: 'Python-pakket voor het evalueren en vergelijken van spraak-naar-tekst systemen voor het Nederlands.',
+    github: 'https://github.com/opensource-spraakherkenning-nl/ASR_NL_benchmark',
+    taal: 'Python',
+  },
+  {
+    naam: 'ASR NL Webservice',
+    beschrijving: 'Nederlandse spraakherkenningswebservice op basis van Kaldi en CLAM.',
+    github: 'https://github.com/opensource-spraakherkenning-nl/asr_nl',
+    taal: 'Python',
+  },
+  {
+    naam: 'ASR Service (WhisperX)',
+    beschrijving: 'Automatische spraakherkenningsdienst met ondersteuning voor meerdere talen, aangedreven door WhisperX.',
+    github: 'https://github.com/opensource-spraakherkenning-nl/asrservice',
+    taal: 'Python',
+  },
+  {
+    naam: 'ASR NL Resultaten',
+    beschrijving: 'Door de gemeenschap bijgehouden resultaten van Nederlandse ASR-modellen.',
+    github: 'https://github.com/opensource-spraakherkenning-nl/ASR_NL_results',
+    taal: '',
+  },
+  {
+    naam: 'Diarisatieservice',
+    beschrijving: 'Spreker-identificatieservice op basis van PyAnnote en CLAM.',
+    github: 'https://github.com/opensource-spraakherkenning-nl/diarisationservice',
+    taal: 'Python',
+  },
+  {
+    naam: 'G2P Service',
+    beschrijving: 'Grapheme-to-phoneme conversietools en -modellen voor het Nederlands.',
+    github: 'https://github.com/opensource-spraakherkenning-nl/g2pservice',
+    taal: 'Python',
+  },
+  {
+    naam: 'Fries-Nederlands ASR',
+    beschrijving: 'Automatische spraakherkenning voor Fries-Nederlands.',
+    github: 'https://github.com/opensource-spraakherkenning-nl/fy-nl_ASR',
+    taal: 'Python',
+  },
+];
+---
+
+<BaseLayout
+  title="Bronnen"
+  description="Open spraaktechnologietools, datasets en webservices voor het Nederlands."
+>
+  <div class="container">
+
+    <div class="page-header">
+      <h1>Bronnen</h1>
+      <p>Open source tools, webservices en datasets voor Nederlandse spraaktechnologie.</p>
+    </div>
+
+    <section class="section">
+      <h2>Software &amp; webservices</h2>
+      <ul class="post-list">
+        {tools.map(tool => (
+          <li>
+            <div style="display: flex; align-items: baseline; gap: 0.75rem; flex-wrap: wrap;">
+              <a href={tool.github} target="_blank" rel="noopener" class="post-title">{tool.naam}</a>
+              {tool.taal && <span class="tag">{tool.taal}</span>}
+            </div>
+            <p class="post-description">{tool.beschrijving}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Externe datasets &amp; modellen</h2>
+      <p>Nader te vullen. Neem contact op als u een bron wilt toevoegen.</p>
+    </section>
+
+  </div>
+</BaseLayout>
