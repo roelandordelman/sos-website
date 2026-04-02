@@ -1,4 +1,5 @@
 ---
+const base = import.meta.env.BASE_URL;
 const jaar = new Date().getFullYear();
 ---
 
@@ -10,10 +11,10 @@ const jaar = new Date().getFullYear();
         KvK: 74801260 &nbsp;·&nbsp; ANBI-status
       </div>
       <div class="footer-links">
-        <a href="/over#anbi">ANBI-gegevens</a>
-        <a href="/over#bestuur">Bestuur</a>
-        <a href="/over#colofon">Colofon</a>
-        <a href="https://github.com/opensource-spraakherkenning-nl" target="_blank" rel="noopener">GitHub</a>
+        <a href={`${base}over#anbi`}>ANBI-gegevens</a>
+        <a href={`${base}over#bestuur`}>Bestuur</a>
+        <a href={`${base}over#colofon`}>Colofon</a>
+        <a href="https://github.com/roelandordelman/sos-website" target="_blank" rel="noopener">GitHub</a>
         <a href="https://www.linkedin.com/company/open-spraaktechnologie" target="_blank" rel="noopener">LinkedIn</a>
       </div>
       <div>

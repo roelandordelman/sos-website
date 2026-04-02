@@ -2,6 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
+const base = import.meta.env.BASE_URL;
+
 const posts = (await getCollection('nieuws'))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
@@ -24,7 +26,7 @@ const posts = (await getCollection('nieuws'))
               {post.data.date.toLocaleDateString('nl-NL', { year: 'numeric', month: 'long', day: 'numeric' })}
               {post.data.auteur && <> &nbsp;·&nbsp; {post.data.auteur}</>}
             </p>
-            <a href={`/nieuws/${post.slug}`} class="post-title">{post.data.title}</a>
+            <a href={`${base}nieuws/${post.slug}`} class="post-title">{post.data.title}</a>
             {post.data.description && (
               <p class="post-description">{post.data.description}</p>
             )}

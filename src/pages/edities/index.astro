@@ -2,6 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
+const base = import.meta.env.BASE_URL;
+
 const edities = (await getCollection('edities'))
   .sort((a, b) => b.data.datum.getTime() - a.data.datum.getTime());
 ---
@@ -24,7 +26,7 @@ const edities = (await getCollection('edities'))
             {e.data.datum.toLocaleDateString('nl-NL', { year: 'numeric', month: 'long', day: 'numeric' })}
             {e.data.locatie && <> &nbsp;·&nbsp; {e.data.locatie}</>}
           </p>
-          <a href={`/edities/${e.slug}`} class="post-title">{e.data.title}</a>
+          <a href={`${base}edities/${e.slug}`} class="post-title">{e.data.title}</a>
           {e.data.beschrijving && <p class="post-description">{e.data.beschrijving}</p>}
         </li>
       ))}
