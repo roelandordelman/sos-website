@@ -10,10 +10,13 @@ export async function getStaticPaths() {
 
 const { editie } = Astro.props;
 const { Content } = await editie.render();
+const fotos = editie.data.fotos ?? [];
+const fotoBase = `${base}edities/${editie.slug}/web/`;
 ---
 
 <BaseLayout title={editie.data.title} description={editie.data.beschrijving}>
   <div class="container">
+
     <div class="article-header">
       <p class="post-meta">
         {editie.data.datum.toLocaleDateString('nl-NL', { year: 'numeric', month: 'long', day: 'numeric' })}
@@ -26,9 +29,73 @@ const { Content } = await editie.render();
         </p>
       )}
     </div>
-    <div class="article-body"><Content /></div>
+
+    <div class="article-body">
+      <Content />
+    </div>
+
+    {fotos.length > 0 && (
+      <section class="section" id="fotos">
+        <h2>Foto's</h2>
+        <div class="foto-grid">
+          {fotos.map(foto => (
+            <a href={`${fotoBase}${foto}`} target="_blank" rel="noopener" class="foto-item">
+              <img
+                src={`${fotoBase}${foto}`}
+                alt={`Foto Dutch Speech Tech Day ${editie.data.datum.getFullYear()}`}
+                loading="lazy"
+              />
+            </a>
+          ))}
+        </div>
+        <p class="foto-credit">Klik op een foto om te vergroten.</p>
+      </section>
+    )}
+
     <p style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border);">
       <a href={`${base}edities`}>← Alle edities</a>
     </p>
+
   </div>
 </BaseLayout>
+
+<style>
+  .foto-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .foto-item {
+    display: block;
+    overflow: hidden;
+    border-radius: 4px;
+    aspect-ratio: 3 / 2;
+    background: var(--color-bg-alt);
+  }
+
+  .foto-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.2s ease;
+    display: block;
+  }
+
+  .foto-item:hover img {
+    transform: scale(1.03);
+  }
+
+  .foto-credit {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-top: 0.75rem;
+  }
+
+  @media (max-width: 640px) {
+    .foto-grid {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+  }
+</style>

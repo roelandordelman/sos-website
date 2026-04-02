@@ -7,6 +7,7 @@ const nieuws = defineCollection({
     date: z.date(),
     description: z.string().optional(),
     auteur: z.string().optional(),
+    linkedin_tekst: z.string().optional(), // Tekst voor LinkedIn post (max ~700 tekens aanbevolen)
   }),
 });
 
@@ -29,6 +30,7 @@ const edities = defineCollection({
     locatie: z.string().optional(),
     beschrijving: z.string().optional(),
     programma_url: z.string().url().optional(),
+    fotos: z.array(z.string()).optional(), // bestandsnamen in public/edities/<slug>/web/
   }),
 });
 
