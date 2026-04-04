@@ -25,7 +25,7 @@ partners:
     logo: "projecten/partners/logo_politie.png"
     website: "https://www.politie.nl"
   - naam: "Nederlands Instituut voor Beeld & Geluid"
-    logo: "projecten/partners/logo_beeldengeluid.svg"
+    logo: "projecten/partners/BG_logo.jpg"
     website: "https://www.beeldengeluid.nl"
   - naam: "NPO"
     logo: "projecten/partners/logo_npo.svg"
