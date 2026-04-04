@@ -37,7 +37,7 @@ partners:
     logo: "projecten/partners/logo_radboud.svg"
     website: "https://www.ru.nl"
   - naam: "Alliantie Digitaal Samenleven"
-    logo: "projecten/partners/logo_digitaalsamenleven.png"
+    logo: "projecten/partners/logo_ADS.svg"
     website: "https://digitaalsamenleven.nl"
   - naam: "Y.Digital"
     logo: "projecten/partners/logo_ydigital.png"
