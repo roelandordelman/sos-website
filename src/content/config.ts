@@ -12,14 +12,36 @@ const nieuws = defineCollection({
   }),
 });
 
+export const onderwerpen = [
+  'Automatische spraakherkenning',
+  'Spraaksynthese',
+  'Spreker- en taalherkenning',
+  'Gesproken taalbegrip & dialoog',
+  'Spraakverbetering & -codering',
+  'Meertalig & laagresource',
+  'Spraak & gezondheid',
+  'Paralinguïstiek & emotie',
+  'Fonetiek & prosodie',
+  'Taalbronnen & evaluatie',
+  'Gesproken documentontsluiting',
+  'Anders',
+] as const;
+
 const projecten = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    beschrijving: z.string(),
+    beschrijving: z.string(),                              // Korte beschrijving voor de card (1–2 zinnen)
+    onderwerp: z.array(z.enum(onderwerpen)).default([]),   // Een of meer onderwerpen
+    instelling: z.string().optional(),                     // Bijv. "Radboud University"
+    contact: z.string().optional(),                        // Naam contactpersoon
+    contact_email: z.string().email().optional(),
+    logo: z.string().optional(),                           // Pad in public/, bijv. "projecten/mijnproject.png"
+    website: z.string().url().optional(),
     github: z.string().url().optional(),
-    taal: z.string().optional(),
-    status: z.enum(['actief', 'archief']).default('actief'),
+    financiering: z.string().optional(),                   // Bijv. "NWO, Horizon Europe"
+    looptijd: z.string().optional(),                       // Bijv. "2023–2026"
+    status: z.enum(['actief', 'afgerond']).default('actief'),
   }),
 });
 

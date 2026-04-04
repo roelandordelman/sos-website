@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import { base } from '../../lib/base';
 
 export async function getStaticPaths() {
   const projecten = await getCollection('projecten');
@@ -12,25 +13,37 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { Content } = await project.render();
+const d = project.data;
 ---
 
-<BaseLayout title={project.data.title} description={project.data.beschrijving}>
+<BaseLayout title={d.title} description={d.beschrijving}>
   <div class="container">
 
     <div class="article-header">
-      <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; flex-wrap: wrap;">
-        {project.data.taal && <span class="tag">{project.data.taal}</span>}
-        {project.data.status === 'archief' && <span class="tag">Archief</span>}
-      </div>
-      <h1>{project.data.title}</h1>
-      <p style="color: var(--color-text-muted); margin-top: 0.5rem;">{project.data.beschrijving}</p>
-      {project.data.github && (
-        <p style="margin-top: 1rem;">
-          <a href={project.data.github} target="_blank" rel="noopener" class="btn">
-            Bekijk op GitHub →
-          </a>
-        </p>
+      {d.logo && (
+        <div class="project-logo">
+          <img src={`${base}${d.logo}`} alt={`${d.title} logo`} />
+        </div>
       )}
+      <h1>{d.title}</h1>
+      {d.instelling && <p class="project-instelling">{d.instelling}</p>}
+      <p style="color: var(--color-text-muted); margin-top: 0.5rem;">{d.beschrijving}</p>
+
+      <div class="card-tags" style="margin-top: 0.75rem;">
+        {d.onderwerp.map(o => <span class="tag">{o}</span>)}
+        {d.status === 'afgerond' && <span class="tag tag--muted">Afgerond</span>}
+      </div>
+
+      <dl class="project-meta">
+        {d.looptijd     && <><dt>Looptijd</dt>    <dd>{d.looptijd}</dd></>}
+        {d.financiering && <><dt>Financiering</dt><dd>{d.financiering}</dd></>}
+        {d.contact      && <><dt>Contact</dt>     <dd>{d.contact_email
+          ? <a href={`mailto:${d.contact_email}`}>{d.contact}</a>
+          : d.contact
+        }</dd></>}
+        {d.website && <><dt>Website</dt><dd><a href={d.website} target="_blank" rel="noopener">{d.website}</a></dd></>}
+        {d.github  && <><dt>GitHub</dt> <dd><a href={d.github}  target="_blank" rel="noopener">{d.github}</a></dd></>}
+      </dl>
     </div>
 
     <div class="article-body">
@@ -38,8 +51,50 @@ const { Content } = await project.render();
     </div>
 
     <p style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border);">
-      <a href="/projecten">← Terug naar projecten</a>
+      <a href={`${base}projecten`}>← Terug naar projecten</a>
     </p>
 
   </div>
 </BaseLayout>
+
+<style>
+  .project-logo {
+    margin-bottom: 1.5rem;
+  }
+
+  .project-logo img {
+    max-height: 80px;
+    max-width: 240px;
+    object-fit: contain;
+  }
+
+  .project-instelling {
+    font-size: 0.9rem;
+    color: var(--color-accent);
+    font-weight: 500;
+    margin: 0.25rem 0 0;
+  }
+
+  .project-meta {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.35rem 1.5rem;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    max-width: 560px;
+  }
+
+  .project-meta dt {
+    color: var(--color-text-muted);
+    font-weight: 500;
+  }
+
+  .project-meta dd {
+    margin: 0;
+  }
+
+  .tag--muted {
+    background: var(--color-bg-alt);
+    color: var(--color-text-muted);
+  }
+</style>
