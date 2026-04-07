@@ -5,29 +5,114 @@ import { base } from '../../lib/base';
 
 const posts = (await getCollection('nieuws'))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+// Groepeer per jaar
+const perJaar = posts.reduce((acc, post) => {
+  const jaar = post.data.date.getFullYear();
+  if (!acc[jaar]) acc[jaar] = [];
+  acc[jaar].push(post);
+  return acc;
+}, {} as Record<number, typeof posts>);
+
+const jaren = Object.keys(perJaar).map(Number).sort((a, b) => b - a);
 ---
 
 <BaseLayout title="Nieuws" description="Nieuws en berichten van Stichting Open Spraaktechnologie.">
   <div class="container">
     <div class="page-header">
       <h1>Nieuws</h1>
-      <p>Berichten en updates van de stichting.</p>
+      <p>Berichten en updates van de stichting en het Nederlandse spraaktechnologieveld.</p>
     </div>
+
     {posts.length === 0 ? (
       <p>Nog geen berichten.</p>
     ) : (
-      <ul class="post-list">
-        {posts.map(post => (
-          <li>
-            <p class="post-meta">
-              {post.data.date.toLocaleDateString('nl-NL', { year: 'numeric', month: 'long', day: 'numeric' })}
-              {post.data.auteur && <> &nbsp;·&nbsp; {post.data.auteur}</>}
-            </p>
-            <a href={`${base}nieuws/${post.slug}`} class="post-title">{post.data.title}</a>
-            {post.data.description && <p class="post-description">{post.data.description}</p>}
-          </li>
-        ))}
-      </ul>
+      jaren.map(jaar => (
+        <section class="jaar-sectie">
+          <h2 class="jaar-kop">{jaar}</h2>
+          <ul class="nieuws-lijst">
+            {perJaar[jaar].map(post => (
+              <li class="nieuws-item">
+                {post.data.image && (
+                  <a href={`${base}nieuws/${post.slug}`} class="nieuws-thumb-link">
+                    <img
+                      src={`${base}${post.data.image}`}
+                      alt={post.data.title}
+                      class="nieuws-thumb"
+                    />
+                  </a>
+                )}
+                <div class="nieuws-body">
+                  <p class="post-meta">
+                    {post.data.date.toLocaleDateString('nl-NL', { month: 'long', day: 'numeric' })}
+                    {post.data.auteur && <> &nbsp;·&nbsp; {post.data.auteur}</>}
+                  </p>
+                  <a href={`${base}nieuws/${post.slug}`} class="post-title">{post.data.title}</a>
+                  {post.data.description && (
+                    <p class="post-description">{post.data.description}</p>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
     )}
   </div>
 </BaseLayout>
+
+<style>
+  .jaar-sectie {
+    margin-bottom: 2.5rem;
+  }
+
+  .jaar-kop {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .nieuws-lijst {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .nieuws-item {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+
+  .nieuws-thumb-link {
+    flex-shrink: 0;
+  }
+
+  .nieuws-thumb {
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+  }
+
+  .nieuws-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  @media (max-width: 480px) {
+    .nieuws-thumb {
+      width: 80px;
+      height: 54px;
+    }
+  }
+</style>
