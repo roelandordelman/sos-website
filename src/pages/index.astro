@@ -40,7 +40,7 @@ const komende = edities
       <h2 class="section-title">Wat we doen</h2>
       <div class="activiteiten-lijst">
         <div class="activiteit">
-          <span class="activiteit-icon">🎤</span>
+          <img src={`${base}edities/speechtechdag-2026/web/DSCF0973.JPG`} alt="Dutch Speech Tech Day" class="activiteit-foto" />
           <div>
             <strong><a href={`${base}edities`}>Dutch Speech Tech Day</a></strong>
             <p>Jaarlijkse ontmoetingsplaats voor onderzoekers, ontwikkelaars en gebruikers van spraaktechnologie.</p>
@@ -147,6 +147,14 @@ const komende = edities
   .activiteit-icon {
     font-size: 1.5rem;
     line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .activiteit-foto {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 4px;
     flex-shrink: 0;
   }
 
