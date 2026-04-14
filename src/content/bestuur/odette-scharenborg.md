@@ -1,8 +1,8 @@
 ---
 naam: Odette Scharenborg
 rol: Bestuurslid
-foto: /bestuur/odette-scharenborg.jpg
+foto: /bestuur/Odette_portrait.jpg
 volgorde: 6
 ---
 
-Hoogleraar en Delft Technology Fellow, Technische Universiteit Delft.
+Full Professor of Inclusive Speech Communication, Delft Inclusive Speech Communication (DISC) Lab/Multimedia Computing Group, Delft University of Technology.
