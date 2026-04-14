@@ -10,42 +10,44 @@ Op **8 mei 2026** organiseert Stichting Open Spraaktechnologie een workshop over
 
 ## Programma
 
-| Tijd | Spreker | Onderwerp |
-|------|---------|-----------|
-| 10:30–11:00 | — | Walk-in en koffie |
-| 11:00–11:05 | Grzegorz Chrupała | Welkom |
-| 11:05–11:30 | Hosein Mohebbi | Actionable Interpretability for Speech Transformers |
-| 11:30–11:55 | Gaofei Shen | Beyond Decodability: Reconstructing Language Model Representations with an Encoding Probe |
-| 11:55–12:20 | Yuanyuan Zhang | A Semi-spontaneous Dutch Speech Dataset for Speech Enhancement and Speech Recognition |
-| 12:20–13:10 | — | Lunch (verzorgd) |
-| 13:10–13:55 | Jelle Zuidema | Keynote |
-| 13:55–14:10 | — | Koffiepauze |
-| 14:10–14:35 | Marianne de Heer Kloots | Tracking the emergence of linguistic structure in self-supervised models learning from speech |
-| 14:35–15:00 | Charlotte Pouw | Analyzing In-Context Learning in Speech Language Models |
+**8th May 2026, 10:30–15:00**
+
+| Spreker | Onderwerp |
+|---------|-----------|
+| — | Walk-in and coffee |
+| Grzegorz Chrupała | Welcome |
+| Hosein Mohebbi | Actionable Interpretability for Speech Transformers |
+| Gaofei Shen | Beyond Decodability: Reconstructing Language Model Representations with an Encoding Probe |
+| Yuanyuan Zhang | A Semi-spontaneous Dutch Speech Dataset for Speech Enhancement and Speech Recognition |
+| — | Lunch (provided) |
+| Jelle Zuidema | Keynote |
+| — | Coffee break |
+| Marianne de Heer Kloots | Tracking the emergence of linguistic structure in self-supervised models learning from speech |
+| Charlotte Pouw | Analyzing In-Context Learning in Speech Language Models |
 
 ## Abstracts
 
 ### Actionable Interpretability for Speech Transformers
-*Hosein Mohebbi, Whispp & Universiteit van Amsterdam*
+*Hosein Mohebbi, Whispp & University of Amsterdam*
 
-Actionable interpretability richt zich op het omzetten van inzichten over modelgedrag in iets nuttigs en praktisch toepasbaar. In deze lezing worden twee casestudies in het spraakdomein verkend: ten eerste of linguïstische inhoud te scheiden is van akoestische kenmerken in spraakmodellen om betere beheersbaarheid mogelijk te maken; ten tweede of contextuele audiorepresentaties adaptief kunnen worden gecomprimeerd om de modelefficiëntie te verbeteren.
+Actionable interpretability refers to a recently growing focus within interpretability research community on turning our insights about model behaviors into something useful and practical. In this talk, I'll explore this idea in the domain of speech through two case studies. First, I'll discuss if we can disentangle linguistic content from acoustic features in speech models to enable improved controllability. Second, I'll discuss if we can adaptively compress contextual audio representations to improve model efficiency.
 
 ### Beyond Decodability: Reconstructing Language Model Representations with an Encoding Probe
 *Gaofei Shen, Tilburg University (CSAI)*
 
-Probing wordt veel gebruikt om te onderzoeken wat interne representaties van taalmodellen encoderen. Gangbare aanpak is éénrichtingsverkeer: informatie decoderen uit interne representaties. Deze lezing introduceert een *Encoding Probe* die de richting omdraait: menselijk gedefinieerde linguïstische kenmerken worden gebruikt om de interne representaties te reconstrueren. Het framework wordt geëvalueerd op tekst- en spraak-transformermodellen (waaronder wav2vec2-varianten en BERT) met kenmerksets van akoestiek, fonetiek, syntaxis, lexicon en sprekeridentiteit.
+Probing is widely used to study what language model internal hidden-states encode. However, most work treats probing as a one-way task: decoding information from model internal representations. This standard setup has two main limitations: probe scores are not directly comparable, and probe performance can reflect correlations among features rather than feature-specific effects. Inspired by bidirectional analysis in neuroscience, we present an Encoding Probe that reverses this direction. Instead of decoding linguistic features from model hidden-states, our probe uses human-defined linguistic features to reconstruct the internal representations of language models. We train regression probes and use feature ablations to estimate relative feature contributions. We evaluate the framework on text and speech transformer models including wav2vec2 variants and BERT, using feature sets spanning acoustics, phonetics, syntax, lexicon and speaker identity. Our results suggest that speaker related effects vary strongly across different training objectives/datasets, while syntactic and lexical features make distinct contributions at different magnitudes. These results show that encoding probe provides a complementary perspective on interpreting model representations beyond decodability.
 
 ### A Semi-spontaneous Dutch Speech Dataset for Speech Enhancement and Speech Recognition
 *Yuanyuan Zhang, TU Delft*
 
-DRES is een nieuw Nederlandstalig spraakdataset van 1,5 uur, opgenomen met 80 sprekers in rumoerige binnenruimtes. Het dataset is ontworpen als testset voor evaluatie van automatische spraakherkenning (ASR) en spraakverbetering (SE) onder realistische omstandigheden. Vijf van de acht geëvalueerde ASR-modellen behalen een WER onder de 22% op DRES. Opvallend: moderne single-channel spraakverbetering bleek het ASR-resultaat niet te verbeteren — wat het belang van evaluatie onder realistische condities onderstreept.
+We present DRES: a 1.5-hour Dutch realistic elicited (semispontaneous) speech dataset from 80 speakers recorded in noisy, public indoor environments. DRES was designed as a test set for the evaluation of state-of-the-art (SOTA) automatic speech recognition (ASR) and speech enhancement (SE) models in a real-world scenario: a person speaking in a public indoor space with background talkers and noise. The speech was recorded with a four-channel linear microphone array. In this work we evaluate the speech quality of five well-known single-channel SE algorithms and the recognition performance of eight SOTA off-the-shelf ASR models before and after applying SE on the speech of DRES. We found that five out of the eight ASR models have WERs lower than 22% on DRES, despite the challenging conditions. In contrast to recent work, we did not find a positive effect of modern single-channel SE on ASR performance, emphasizing the importance of evaluating in realistic conditions.
 
 ### Tracking the Emergence of Linguistic Structure in Self-supervised Models Learning from Speech
-*Marianne de Heer Kloots, Universiteit van Amsterdam (ILLC)*
+*Marianne de Heer Kloots, University of Amsterdam (ILLC)*
 
-Self-supervised spraakmodellen leren effectieve representaties van gesproken taal. Maar wanneer ontstaat linguïstische structuur tijdens het trainen? Dit onderzoek volgt de codering van uiteenlopende linguïstische structuren over lagen en tussentijdse checkpoints van zes Wav2Vec2- en HuBERT-modellen getraind op gesproken Nederlands. Verschillende niveaus van linguïstische structuur laten opvallend verschillende leertrajecten zien, deels verklaarbaar door abstractiegraad en tijdschaal van informatieverwerking.
+Self-supervised speech models learn effective representations of spoken language, which have been shown to reflect various aspects of linguistic structure. But when does such structure emerge in model training? We study the encoding of a wide range of linguistic structures, across layers and intermediate checkpoints of six Wav2Vec2 and HuBERT models trained on spoken Dutch. We find that different levels of linguistic structure show notably distinct layerwise patterns as well as learning trajectories, which can partially be explained by differences in their degree of abstraction from the acoustic signal and the timescale at which information from the input is integrated. Moreover, we find that the level at which pre-training objectives are defined strongly affects both the layerwise organization and the learning trajectories of linguistic structures, with greater parallelism induced by higher-order prediction tasks (i.e. iteratively refined pseudo-labels).
 
 ### Analyzing In-Context Learning in Speech Language Models
-*Charlotte Pouw, Universiteit van Amsterdam (ILLC)*
+*Charlotte Pouw, University of Amsterdam (ILLC)*
 
-Grote taalmodellen kunnen taken leren uit in-context voorbeelden (*in-context learning*, ICL). Spraak-taalmodellen breiden dit uit naar taken met zowel spraak als tekst. Welke eigenschappen van de in-context voorbeelden zijn van belang voor spraak-ICL, en welke mechanismen spelen een rol? Deze lezing presenteert empirische bevindingen over akoestische en linguïstische eigenschappen van in-context voorbeelden, en laat zien dat specifieke *attention heads* (inductiekoppen) een causale rol spelen in spraak-ICL — een patroon dat ook in tekstmodellen is gevonden.
+Large language models (LLMs) trained on text corpora can learn downstream tasks from in-context examples, a capability known as in-context learning (ICL). Recently, speech language models (SpeechLMs) have extended ICL to tasks involving both speech and text, such as automatic speech recognition and text-to-speech synthesis. This raises two questions: which properties of the in-context examples matter for speech-based ICL, and what mechanisms enable it inside the model? In this talk, I will first present empirical findings on how different acoustic and linguistic properties of the in-context examples influence ICL performance. I will then show that specific attention heads (known as induction heads) play a causal role in speech-based ICL, mirroring findings in text-only models.
