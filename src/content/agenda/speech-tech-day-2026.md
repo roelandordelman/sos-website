@@ -1,12 +1,11 @@
 ---
-title: "Dutch Speech Tech Day 2026"
-datum: 2026-04-03
-locatie: "Tilburg"
+title: "4e Dutch Speech Tech Day 2026"
+datum: 2026-02-02
+locatie: "Beeld & Geluid, Hilversum"
 type: speech-tech-day
 status: bevestigd
-beschrijving: "De jaarlijkse ontmoetingsplaats voor iedereen die werkt met of geïnteresseerd is in spraaktechnologie — onderzoekers, ontwikkelaars, beleidsmakers en eindgebruikers."
+beschrijving: "Crossing the Lines: Academia, Industry, and the Future of Knowledge. De vierde editie van de Dutch Speech Tech Day, op 2 februari 2026 bij Beeld & Geluid in Hilversum."
+url_intern: "edities/speechtechdag-2026"
 ---
 
-De Dutch Speech Tech Day is het grootste jaarlijkse evenement rond spraaktechnologie in Nederland. Het brengt onderzoekers, ontwikkelaars, beleidsmakers en eindgebruikers samen voor lezingen, demo's en discussie over de laatste ontwikkelingen in het veld.
-
-De editie van 2026 vond plaats op 3 april in Tilburg.
+Zie de [evenementenpagina](/edities/speechtechdag-2026/) voor alle informatie over deze editie.

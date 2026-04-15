@@ -83,7 +83,8 @@ const agenda = defineCollection({
     type: z.enum(['speech-tech-day', 'workshop', 'school', 'extern']),
     status: z.enum(['bevestigd', 'concept', 'gepland']).default('gepland'),
     beschrijving: z.string().optional(),
-    url_extern: z.string().url().optional(), // voor externe evenementen
+    url_extern: z.string().url().optional(),  // voor externe evenementen
+    url_intern: z.string().optional(),        // intern pad, bijv. "edities/speechtechdag-2026"
   }),
 });
 

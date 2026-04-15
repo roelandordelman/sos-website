@@ -1,10 +1,11 @@
 ---
-title: "Dutch Speech Tech Day 2027"
-datum: 2027-04-01
+title: "5e Dutch Speech Tech Day 2027"
+datum: 2027-02-01
 locatie: "Nederland"
 type: speech-tech-day
 status: gepland
-beschrijving: "De jaarlijkse ontmoetingsplaats voor iedereen die werkt met of geïnteresseerd is in spraaktechnologie — onderzoekers, ontwikkelaars, beleidsmakers en eindgebruikers."
+beschrijving: "De jaarlijkse ontmoetingsplaats voor iedereen die werkt met of geïnteresseerd is in spraaktechnologie. Datum en locatie worden te zijner tijd bekendgemaakt."
+url_intern: "edities/speechtechdag-2027"
 ---
 
-De Dutch Speech Tech Day is het grootste jaarlijkse evenement rond spraaktechnologie in Nederland. Datum en locatie voor 2027 worden te zijner tijd bekendgemaakt.
+Zie de [evenementenpagina](/edities/speechtechdag-2027/) voor meer informatie.

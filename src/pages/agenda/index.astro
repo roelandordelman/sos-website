@@ -55,11 +55,13 @@ const statusLabel: Record<string, string> = {
                 <span class={`status status-${item.data.status}`}>{statusLabel[item.data.status]}</span>
               </div>
               <h3>
-                {item.data.type !== 'extern'
-                  ? <a href={`${base}agenda/${item.slug}`}>{item.data.title}</a>
-                  : item.data.url_extern
-                    ? <a href={item.data.url_extern} target="_blank" rel="noopener">{item.data.title}</a>
-                    : item.data.title
+                {item.data.url_intern
+                  ? <a href={`${base}${item.data.url_intern}`}>{item.data.title}</a>
+                  : item.data.type !== 'extern'
+                    ? <a href={`${base}agenda/${item.slug}`}>{item.data.title}</a>
+                    : item.data.url_extern
+                      ? <a href={item.data.url_extern} target="_blank" rel="noopener">{item.data.title}</a>
+                      : item.data.title
                 }
               </h3>
               <p class="agenda-meta">
@@ -70,7 +72,10 @@ const statusLabel: Record<string, string> = {
                 {item.data.locatie && <> &nbsp;·&nbsp; {item.data.locatie}</>}
               </p>
               {item.data.beschrijving && <p class="agenda-beschrijving">{item.data.beschrijving}</p>}
-              {item.data.type !== 'extern' && (
+              {item.data.url_intern && (
+                <a href={`${base}${item.data.url_intern}`} class="meer-link">Meer informatie →</a>
+              )}
+              {!item.data.url_intern && item.data.type !== 'extern' && (
                 <a href={`${base}agenda/${item.slug}`} class="meer-link">Meer informatie →</a>
               )}
             </div>
