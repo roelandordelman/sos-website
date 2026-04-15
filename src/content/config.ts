@@ -73,4 +73,18 @@ const bestuur = defineCollection({
   }),
 });
 
-export const collections = { nieuws, projecten, edities, bestuur };
+const agenda = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    datum: z.date(),
+    datum_eind: z.date().optional(),
+    locatie: z.string().optional(),
+    type: z.enum(['speech-tech-day', 'workshop', 'school', 'extern']),
+    status: z.enum(['bevestigd', 'concept', 'gepland']).default('gepland'),
+    beschrijving: z.string().optional(),
+    url_extern: z.string().url().optional(), // voor externe evenementen
+  }),
+});
+
+export const collections = { nieuws, projecten, edities, bestuur, agenda };

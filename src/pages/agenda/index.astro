@@ -1,0 +1,178 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { base } from '../../lib/base';
+
+const items = await getCollection('agenda');
+const gesorteerd = items.sort((a, b) => a.data.datum.getTime() - b.data.datum.getTime());
+
+const perJaar = gesorteerd.reduce((acc, item) => {
+  const jaar = item.data.datum.getFullYear();
+  if (!acc[jaar]) acc[jaar] = [];
+  acc[jaar].push(item);
+  return acc;
+}, {} as Record<number, typeof gesorteerd>);
+
+const jaren = Object.keys(perJaar).map(Number).sort((a, b) => a - b);
+
+const typeLabel: Record<string, string> = {
+  'speech-tech-day': 'Speech Tech Day',
+  'workshop':        'Workshop',
+  'school':          'Summer/Winter School',
+  'extern':          'Extern',
+};
+
+const typeKleur: Record<string, string> = {
+  'speech-tech-day': 'tag-blauw',
+  'workshop':        'tag-groen',
+  'school':          'tag-oranje',
+  'extern':          'tag-grijs',
+};
+
+const statusLabel: Record<string, string> = {
+  'bevestigd': 'Bevestigd',
+  'concept':   'Concept',
+  'gepland':   'Gepland',
+};
+---
+
+<BaseLayout title="Agenda">
+  <div class="container">
+    <h1>Agenda</h1>
+    <p class="intro">
+      Overzicht van evenementen rond spraaktechnologie, georganiseerd door of in samenwerking met Stichting Open Spraaktechnologie.
+      SOS zet zich in voor drie jaarlijkse evenementen: de <strong>Dutch Speech Tech Day</strong> (breed publiek), een <strong>wetenschappelijke workshop</strong> en een <strong>summer of winter school</strong>.
+    </p>
+
+    {jaren.map(jaar => (
+      <section class="agenda-jaar">
+        <h2>{jaar}</h2>
+        <div class="agenda-lijst">
+          {perJaar[jaar].map(item => (
+            <div class={`agenda-card ${item.data.type}`}>
+              <div class="agenda-card-header">
+                <span class={`tag ${typeKleur[item.data.type]}`}>{typeLabel[item.data.type]}</span>
+                <span class={`status status-${item.data.status}`}>{statusLabel[item.data.status]}</span>
+              </div>
+              <h3>
+                {item.data.type !== 'extern'
+                  ? <a href={`${base}agenda/${item.slug}`}>{item.data.title}</a>
+                  : item.data.url_extern
+                    ? <a href={item.data.url_extern} target="_blank" rel="noopener">{item.data.title}</a>
+                    : item.data.title
+                }
+              </h3>
+              <p class="agenda-meta">
+                {item.data.datum.toLocaleDateString('nl-NL', { year: 'numeric', month: 'long', day: 'numeric' })}
+                {item.data.datum_eind && (
+                  <> – {item.data.datum_eind.toLocaleDateString('nl-NL', { year: 'numeric', month: 'long', day: 'numeric' })}</>
+                )}
+                {item.data.locatie && <> &nbsp;·&nbsp; {item.data.locatie}</>}
+              </p>
+              {item.data.beschrijving && <p class="agenda-beschrijving">{item.data.beschrijving}</p>}
+              {item.data.type !== 'extern' && (
+                <a href={`${base}agenda/${item.slug}`} class="meer-link">Meer informatie →</a>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  h1 { margin-bottom: 0.5rem; }
+
+  .intro {
+    color: var(--color-text-muted);
+    max-width: 720px;
+    margin-bottom: 2rem;
+  }
+
+  .agenda-jaar h2 {
+    font-size: 1.5rem;
+    border-bottom: 2px solid var(--color-border);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.25rem;
+    margin-top: 2rem;
+  }
+
+  .agenda-lijst {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .agenda-card {
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 1.25rem;
+    background: var(--color-bg-alt);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .agenda-card h3 {
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  .agenda-card h3 a {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .agenda-card h3 a:hover {
+    color: var(--color-primary);
+  }
+
+  .agenda-card-header {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .tag-blauw  { background: #dbeafe; color: #1d4ed8; }
+  .tag-groen  { background: #dcfce7; color: #166534; }
+  .tag-oranje { background: #ffedd5; color: #9a3412; }
+  .tag-grijs  { background: #f3f4f6; color: #374151; }
+
+  .status {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .status-bevestigd { color: #166534; }
+  .status-concept   { color: #92400e; }
+  .status-gepland   { color: var(--color-text-muted); }
+
+  .agenda-meta {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .agenda-beschrijving {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin: 0;
+    flex: 1;
+  }
+
+  .meer-link {
+    font-size: 0.85rem;
+    margin-top: auto;
+  }
+</style>
