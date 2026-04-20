@@ -16,18 +16,30 @@ Het bedrijf wordt geleid door dr. Maarten Sukel, gepromoveerd in Multimodal Mach
 
 ## Prestatieclaim
 
-Op een benchmark van negen uur Nederlandstalig parlementair audiomateriaal haalt Murmel een Word Error Rate (WER) van 17,3%. Ter vergelijking: Voxtral-small van Mistral — aangeduid als de beste concurrent — zou uitkomen op 20,8% WER.
+Op een benchmark van 1.662 parlementaire audiosegmenten (totaal circa 9 uur) haalt Murmel een Word Error Rate (WER) van 17,3%. Ter vergelijking: Voxtral-small van Mistral — aangeduid als de beste concurrent — zou uitkomen op 20,8% WER. De overige geëvalueerde modellen scoorden allemaal hoger dan 16% WER op vrouwelijke sprekers.
 
 ## Evaluatie
 
-De claim is opvallend, maar roept ook vragen op. Ten eerste: *hoe is geëvalueerd?* Een WER van 17,3% op parlementaire audio is een specifiek domein — spraakmakend, maar niet representatief voor alle gebruikssituaties zoals conversationele spraak, dialecten of telefonische kwaliteit. Het is onduidelijk of de benchmark openbaar is, door een onafhankelijke partij is uitgevoerd, of gereproduceerd kan worden.
+De claim is onderbouwd met meer detail dan aanvankelijk bekend, maar roept nog steeds vragen op. De benchmark bestaat uit 1.662 segmenten parlementaire audio — een specifiek en relatief formeel domein. Hoe het model presteert op conversationele spraak, dialecten of telefonische kwaliteit blijft onduidelijk. Ook is niet vermeld of de benchmark openbaar beschikbaar is of door een onafhankelijke partij is geverifieerd.
 
-Ten tweede: *waarom juist Voxtral-small als referentie?* Voxtral-small is een lichtgewicht open-source model — geen directe concurrent van een commercieel aanbod. Een vergelijking met Whisper large-v3, of met andere commerciële transcriptiediensten, zou een completer beeld geven.
+De keuze voor Voxtral-small als voornaamste vergelijkingspunt is opvallend: dit is een lichtgewicht open-source model, geen commercieel alternatief. Een vergelijking met Whisper large-v3 of andere marktleiders zou een vollediger beeld geven.
 
-Ten derde: *wat is de herkomst van de trainingsdata?* Murmel is getraind op "duizenden uren Nederlandstalig spraakmateriaal uit alle provincies en met alle dialecten en sprekerprofielen." Dat klinkt veelbelovend, maar de vraag is of die data afkomstig zijn uit rechtmatig gelicentieerde of gecrawlde bronnen. In een tijd van toenemende aandacht voor auteursrecht en de EU AI Act is transparantie over trainingsdata een serieuze kwestie.
+## Trainingsdata
+
+The AI Factory geeft inmiddels meer inzicht in de herkomst van de trainingsdata. Het model is getraind op duizenden uren Nederlands spraakaudio afkomstig uit:
+
+- Parlementaire debatten
+- Uitzendingen van de publieke omroep
+- Diverse openbare bronnen
+
+De data vertegenwoordigt breed Nederlands: formeel en informeel taalgebruik, regionale accenten, en zowel moedertaalsprekers als niet-moedertaalsprekers. De gebruikte bronnen lijken overwegend publiek toegankelijk, al wordt niet expliciet vermeld welke licenties van toepassing zijn — een relevante vraag in het licht van de EU AI Act.
+
+## Bredere ambitie
+
+Dr. Sukel plaatst Murmel in een groter kader: Nederlandse en Europese organisaties zouden AI-technologie meer moeten *produceren* in plaats van alleen consumeren. Hij positioneert Murmel als een eerste stap naar vergelijkbare taalmodellen voor andere Europese talen.
 
 ## Marktrespons
 
 Ondanks de openstaande vragen is de marktreactie opmerkelijk: binnen een week na lancering zegt The AI Factory meer dan 100 aanvragen van gemeenten, universiteiten en ministeries te hebben ontvangen. Het platform werkt met een freemiummodel; betaalde abonnementen starten vanaf €29 per maand.
 
-Lees meer via de [inzending voor de Computable Awards 2026](https://www.computable.nl/awards/2026/inzendingen/tech-startup/the-ai-factory-murmel-het-nederlandse-spraak-ai-model-dat-elk-alternatief/).
+Lees meer via de [inzending voor de Computable Awards 2026](https://www.computable.nl/awards/2026/inzendingen/tech-startup/the-ai-factory-murmel-het-nederlandse-spraak-ai-model-dat-elk-alternatief/) en het [blogbericht van The AI Factory](https://the-ai-factory.com/insights/murmel-dutch-speech-to-text).
